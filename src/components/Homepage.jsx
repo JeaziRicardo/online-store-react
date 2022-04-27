@@ -12,8 +12,8 @@ export default class Homepage extends Component {
   }
 
   handleChange = ({ target }) => {
-    const { event } = target;
-    this.setState({ search: event });
+    const { value } = target;
+    this.setState({ search: value });
   };
 
   handleClick = async () => {
