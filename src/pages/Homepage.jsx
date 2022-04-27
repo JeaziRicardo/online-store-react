@@ -26,15 +26,23 @@ export default class Homepage extends Component {
     return (
       <div className="homepage">
         <CategoryFilter categoryList={ categoryList } />
-        <label htmlFor="search-product">
+        <label htmlFor="query">
           <input
-            id="search-product"
+            name="query"
+            data-testid="query-input"
+            type="text"
           />
-          <CartButton />
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
         </label>
+        <button
+          data-testid="query-button"
+          type="button"
+        >
+          Busca
+        </button>
+        <CartButton />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
       </div>
     );
   }
