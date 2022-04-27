@@ -9,10 +9,13 @@ export default class Homepage extends Component {
   constructor() {
     super();
 
+    this.onChangeRadio = this.onChangeRadio.bind(this);
+
     this.state = {
       categoryList: [],
       search: '',
       data: null,
+      // idSelectedCategory: '',
     };
   }
 
@@ -20,6 +23,15 @@ export default class Homepage extends Component {
     const datas = await getCategories();
     this.setState({
       categoryList: datas,
+    });
+  }
+
+  async onChangeRadio(event) {
+    // const valueElement = event.target.checked;
+    const idElement = event.target.id;
+    const data = await getProductsFromCategoryAndQuery(idElement);
+    this.setState({
+      data,
     });
   }
 
@@ -39,7 +51,10 @@ export default class Homepage extends Component {
 
     return (
       <div className="homepage">
-        <CategoryFilter categoryList={ categoryList } />
+        <CategoryFilter
+          categoryList={ categoryList }
+          onChangeRadio={ this.onChangeRadio }
+        />
         <label htmlFor="query">
           <input
             name="query"
