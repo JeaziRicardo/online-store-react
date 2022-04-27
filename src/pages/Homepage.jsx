@@ -10,6 +10,7 @@ export default class Homepage extends Component {
 
     this.state = {
       categoryList: [],
+      search: '',
     };
   }
 
@@ -18,6 +19,11 @@ export default class Homepage extends Component {
     this.setState({
       categoryList: data,
     });
+  }
+
+  handleChange = ({ target }) => {
+    const { value } = target;
+    this.setState({ search: value });
   }
 
   render() {
@@ -31,6 +37,7 @@ export default class Homepage extends Component {
             name="query"
             data-testid="query-input"
             type="text"
+            onChange={ this.handleChange }
           />
         </label>
         <button
