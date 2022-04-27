@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import CartButton from '../components/CartButton';
 import CategoryFilter from '../components/CategoryFilter';
 import '../style/Homepage.css';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ProductCard from '../components/ProductCard';
 
 export default class Homepage extends Component {
   constructor() {
@@ -11,13 +12,14 @@ export default class Homepage extends Component {
     this.state = {
       categoryList: [],
       search: '',
+      data: null,
     };
   }
 
   async componentDidMount() {
-    const data = await getCategories();
+    const datas = await getCategories();
     this.setState({
-      categoryList: data,
+      categoryList: datas,
     });
   }
 
@@ -29,10 +31,11 @@ export default class Homepage extends Component {
   handleClick = async () => {
     const { search } = this.state;
     const data = await getProductsFromCategoryAndQuery('CATEGORY_ID', search);
+    this.setState({ data });
   };
 
   render() {
-    const { categoryList } = this.state;
+    const { categoryList, data } = this.state;
 
     return (
       <div className="homepage">
@@ -53,9 +56,15 @@ export default class Homepage extends Component {
           Busca
         </button>
         <CartButton />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+        { data === null && (
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        ) }
+        { data !== null && <ProductCard
+          data={ data }
+          inputEmpty={ <p>Nenhum produto foi encontrado</p> }
+        /> }
       </div>
     );
   }

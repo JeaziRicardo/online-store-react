@@ -22,7 +22,7 @@ class ProductCard extends Component {
 
 ProductCard.propTypes = {
   data: PropTypes.shape().isRequired,
-  inputEmpty: PropTypes.string.isRequired,
+  inputEmpty: PropTypes.shape().isRequired,
 };
 
 export default ProductCard;
