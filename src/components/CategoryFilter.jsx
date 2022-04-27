@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../style/CategoryFilter.css';
 
 class CategoryFilter extends React.Component {
   render() {
     const { categoryList } = this.props;
 
     return (
-      <div>
+      <div className="categories">
         {
           categoryList.map((category, index) => (
             <label

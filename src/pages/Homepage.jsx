@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CartButton from '../components/CartButton';
 import CategoryFilter from '../components/CategoryFilter';
+import '../style/Homepage.css';
 
 export default class Homepage extends Component {
   constructor() {
@@ -24,7 +25,7 @@ export default class Homepage extends Component {
     const { categoryList } = this.state;
 
     return (
-      <div>
+      <div className="homepage">
         <CategoryFilter categoryList={ categoryList } />
         <label htmlFor="search-product">
           <input
