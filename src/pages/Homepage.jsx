@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CartButton from '../components/CartButton';
 import CategoryFilter from '../components/CategoryFilter';
 import '../style/Homepage.css';
+import { getCategories } from '../services/api';
 
 export default class Homepage extends Component {
   constructor() {
@@ -13,9 +14,7 @@ export default class Homepage extends Component {
   }
 
   async componentDidMount() {
-    const url = 'https://api.mercadolibre.com/sites/MLB/categories';
-    const response = await fetch(url);
-    const data = await response.json();
+    const data = await getCategories();
     this.setState({
       categoryList: data,
     });
