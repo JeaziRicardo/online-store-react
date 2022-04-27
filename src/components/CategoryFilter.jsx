@@ -4,7 +4,7 @@ import '../style/CategoryFilter.css';
 
 class CategoryFilter extends React.Component {
   render() {
-    const { categoryList } = this.props;
+    const { categoryList, onChangeRadio /* idSelectedCategory */ } = this.props;
 
     return (
       <div className="categories">
@@ -20,6 +20,8 @@ class CategoryFilter extends React.Component {
                 id={ category.id }
                 value={ category.id }
                 name="categories"
+                // value={ idSelectedCategory }
+                onChange={ onChangeRadio }
               />
               { category.name }
             </label>
@@ -35,6 +37,7 @@ CategoryFilter.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
   })),
+  onChangeRadio: PropTypes.func.isRequired,
 };
 
 CategoryFilter.defaultProps = {
