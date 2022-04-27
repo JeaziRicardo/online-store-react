@@ -50,7 +50,7 @@ export default class Homepage extends Component {
         ) }
         { data !== null && <ProductCard
           data={ data }
-          emputEmpty={ <p>Nenhum produto foi encontrado</p> }
+          inputEmpty={ <p>Nenhum produto foi encontrado</p> }
         /> }
       </section>
     );

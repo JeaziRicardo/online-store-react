@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
   render() {
-    const { data, emputEmpty } = this.props;
+    const { data, inputEmpty } = this.props;
     const { results } = data;
     return (
       <section>
-        { results.length === 0 && emputEmpty }
+        { results.length === 0 && inputEmpty }
         { results.length !== 0 && results.map(({ title, price, thumbnail, id }) => (
           <div key={ id } data-testid="product">
             <h3>{ title }</h3>
@@ -22,7 +22,7 @@ class ProductCard extends Component {
 
 ProductCard.propTypes = {
   data: PropTypes.shape().isRequired,
-  emputEmpty: PropTypes.string.isRequired,
+  inputEmpty: PropTypes.string.isRequired,
 };
 
 export default ProductCard;
