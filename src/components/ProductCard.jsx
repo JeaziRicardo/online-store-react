@@ -8,7 +8,7 @@ class ProductCard extends Component {
     return (
       <section>
         {results.map(({ title, price, thumbnail, id }) => (
-          <div key={ id }>
+          <div key={ id } data-testid="product">
             <h3>{ title }</h3>
             <img src={ thumbnail } alt={ title } />
             <p>{ price }</p>
