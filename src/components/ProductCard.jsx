@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ButtonAddCart from './ButtonAddCart';
 
 class ProductCard extends Component {
   render() {
@@ -15,10 +16,8 @@ class ProductCard extends Component {
               <h3>{ title }</h3>
               <img src={ thumbnail } alt={ title } />
               <p>{ `R$ ${price}` }</p>
-              <h3>{ title }</h3>
-              <img src={ thumbnail } alt={ title } />
-              <p>{ `R$ ${price}` }</p>
             </Link>
+            <ButtonAddCart data-testid="product-add-to-cart" />
           </div>
         )) }
       </section>
