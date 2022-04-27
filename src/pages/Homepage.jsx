@@ -26,6 +26,11 @@ export default class Homepage extends Component {
     this.setState({ search: value });
   }
 
+  handleClick = async () => {
+    const { search } = this.state;
+    const data = await getProductsFromCategoryAndQuery('CATEGORY_ID', search);
+  };
+
   render() {
     const { categoryList } = this.state;
 
@@ -43,6 +48,7 @@ export default class Homepage extends Component {
         <button
           data-testid="query-button"
           type="button"
+          onClick={ this.handleClick }
         >
           Busca
         </button>
