@@ -48,7 +48,10 @@ export default class Homepage extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) }
-        { data !== null && <ProductCard data={ data } /> }
+        { data !== null && <ProductCard
+          data={ data }
+          emputEmpty={ <p>Nenhum produto foi encontrado</p> }
+        /> }
       </section>
     );
   }
