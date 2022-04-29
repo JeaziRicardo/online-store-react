@@ -17,7 +17,7 @@ class ProductCard extends Component {
               <img src={ thumbnail } alt={ title } />
               <p>{ `R$ ${price}` }</p>
             </Link>
-            <ButtonAddCart data-testid="product-add-to-cart" />
+            <ButtonAddCart data-testid="product-add-to-cart" id={ id } />
           </div>
         )) }
       </section>
@@ -31,3 +31,5 @@ ProductCard.propTypes = {
 };
 
 export default ProductCard;
+
+/* Nesse arquivo só passei o id como props para o ButtonAddCart */
