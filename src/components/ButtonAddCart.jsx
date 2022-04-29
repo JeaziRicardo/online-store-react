@@ -16,12 +16,13 @@ export default class ButtonAddCart extends Component {
   }
 
   render() {
+    const { dataTestid } = this.props;
     return (
       <div>
         <button
           type="button"
           onClick={ this.handleClick }
-          data-testid="product-add-to-cart"
+          data-testid={ dataTestid }
         >
           Adicionar ao carrinho
         </button>
@@ -32,4 +33,5 @@ export default class ButtonAddCart extends Component {
 
 ButtonAddCart.propTypes = {
   id: propTypes.string.isRequired,
+  dataTestid: propTypes.string.isRequired,
 };

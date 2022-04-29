@@ -17,7 +17,7 @@ class ProductCard extends Component {
               <img src={ thumbnail } alt={ title } />
               <p>{ `R$ ${price}` }</p>
             </Link>
-            <ButtonAddCart data-testid="product-add-to-cart" id={ id } />
+            <ButtonAddCart dataTestid="product-add-to-cart" id={ id } />
           </div>
         )) }
       </section>

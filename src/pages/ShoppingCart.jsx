@@ -33,6 +33,7 @@ export default class ShoppingCart extends Component {
         }
       });
 
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
       await Promise.all(prom);
 
       // no fim de todo a iteração, basta setar o arr no state
