@@ -64,7 +64,12 @@ export default class ShoppingCart extends Component {
                      <div key={ index }>
                        <p data-testid="shopping-cart-product-name">{ prod.title }</p>
 
-                       <QuantityButton title={ prod.title } loadPage={ this.componentDidMount } id={ prod.id } prodQuantity={ prod.quant } />
+                       <QuantityButton
+                         title={ prod.title }
+                         loadPage={ this.componentDidMount }
+                         id={ prod.id }
+                         prodQuantity={ prod.quant }
+                       />
                      </div>
                    ))
                  }

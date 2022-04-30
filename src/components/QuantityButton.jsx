@@ -34,7 +34,7 @@ class QuantityButton extends React.Component {
   }
 
   handleClickMinus() {
-    const { id, loadPage } = this.props;
+    const { id } = this.props;
     const { qtdProducts } = this.state;
 
     if (qtdProducts <= 0) {
@@ -95,7 +95,6 @@ class QuantityButton extends React.Component {
 
 QuantityButton.propTypes = {
   id: propTypes.string.isRequired,
-  prodQuantity: propTypes.number.isRequired,
 };
 
 export default QuantityButton;

@@ -80,20 +80,68 @@ export default class ProductDetails extends Component {
         <h1>Avaliações</h1>
         <div>
           <form onSubmit={ this.saveForm }>
-            <input name="email" onChange={ this.handleChange } type="email" placeholder="teste@trybe.com" data-testid="product-detail-email" required />
+            <input
+              name="email"
+              onChange={ this.handleChange }
+              type="email"
+              placeholder="E-mail"
+              data-testid="product-detail-email"
+              required
+            />
             <label htmlFor="ratingValue">
               1
-              <input data-testid="1-rating" type="radio" onChange={ this.handleChange } name="rating" value="1" required />
+              <input
+                data-testid="1-rating"
+                type="radio"
+                onChange={ this.handleChange }
+                name="rating"
+                value="1"
+                required
+              />
+
               2
-              <input data-testid="2-rating" type="radio" onChange={ this.handleChange } name="rating" value="2" />
+              <input
+                data-testid="2-rating"
+                type="radio"
+                onChange={ this.handleChange }
+                name="rating"
+                value="2"
+              />
+
               3
-              <input data-testid="3-rating" type="radio" onChange={ this.handleChange } name="rating" value="3" />
+              <input
+                data-testid="3-rating"
+                type="radio"
+                onChange={ this.handleChange }
+                name="rating"
+                value="3"
+              />
+
               4
-              <input data-testid="4-rating" type="radio" onChange={ this.handleChange } name="rating" value="4" />
+              <input
+                data-testid="4-rating"
+                type="radio"
+                onChange={ this.handleChange }
+                name="rating"
+                value="4"
+              />
+
               5
-              <input data-testid="5-rating" type="radio" onChange={ this.handleChange } name="rating" value="5" />
+              <input
+                data-testid="5-rating"
+                type="radio"
+                onChange={ this.handleChange }
+                name="rating"
+                value="5"
+              />
             </label>
-            <textarea name="message" onChange={ this.handleChange } data-testid="product-detail-evaluation" placeholder="Mensagem" />
+
+            <textarea
+              name="message"
+              onChange={ this.handleChange }
+              data-testid="product-detail-evaluation"
+              placeholder="Mensagem"
+            />
 
             <button type="submit" data-testid="submit-review-btn">Enviar</button>
           </form>
