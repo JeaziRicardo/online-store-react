@@ -13,7 +13,7 @@ export default class ProductDetails extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     const { match: { params: { id } } } = this.props;
 
     const productDetails = await getProductDetails(id);
@@ -84,13 +84,14 @@ export default class ProductDetails extends Component {
               name="email"
               onChange={ this.handleChange }
               type="email"
-              placeholder="E-mail"
+              placeholder="teste@trybe.com"
               data-testid="product-detail-email"
               required
             />
-            <label htmlFor="ratingValue">
+            <label htmlFor="1-rating">
               1
               <input
+                id="1-rating"
                 data-testid="1-rating"
                 type="radio"
                 onChange={ this.handleChange }
@@ -98,36 +99,44 @@ export default class ProductDetails extends Component {
                 value="1"
                 required
               />
-
+            </label>
+            <label htmlFor="2-rating">
               2
               <input
+                id="2-rating"
                 data-testid="2-rating"
                 type="radio"
                 onChange={ this.handleChange }
                 name="rating"
                 value="2"
               />
-
+            </label>
+            <label htmlFor="3-rating">
               3
               <input
+                id="3-rating"
                 data-testid="3-rating"
                 type="radio"
                 onChange={ this.handleChange }
                 name="rating"
                 value="3"
               />
-
+            </label>
+            <label htmlFor="4-rating">
               4
               <input
+                id="4-rating"
                 data-testid="4-rating"
                 type="radio"
                 onChange={ this.handleChange }
                 name="rating"
                 value="4"
               />
-
+            </label>
+            <label htmlFor="5-rating">
               5
               <input
+                id="5-rating"
                 data-testid="5-rating"
                 type="radio"
                 onChange={ this.handleChange }
@@ -135,7 +144,6 @@ export default class ProductDetails extends Component {
                 value="5"
               />
             </label>
-
             <textarea
               name="message"
               onChange={ this.handleChange }
@@ -143,7 +151,12 @@ export default class ProductDetails extends Component {
               placeholder="Mensagem"
             />
 
-            <button type="submit" data-testid="submit-review-btn">Enviar</button>
+            <button
+              type="submit"
+              data-testid="submit-review-btn"
+            >
+              Enviar
+            </button>
           </form>
         </div>
         {!savedRating ? <p>Sem avaliações</p> : savedRating.map((rating, index) => (
@@ -153,7 +166,6 @@ export default class ProductDetails extends Component {
             <p>{rating[2]}</p>
           </div>
         ))}
-
       </div>
     );
   }
