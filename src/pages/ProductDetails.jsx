@@ -154,6 +154,7 @@ export default class ProductDetails extends Component {
             <button
               type="submit"
               data-testid="submit-review-btn"
+              onClick={ this.componentDidMount }
             >
               Enviar
             </button>
