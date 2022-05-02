@@ -69,13 +69,17 @@ export default class ProductDetails extends Component {
 
   render() {
     const { productDetails: { title }, savedRating } = this.state;
-    const { match: { params: { id } } } = this.props;
+    const { productDetails } = this.state;
+    // const { match: { params: { id } } } = this.props;
 
     return (
       <div>
         <CartButton />
         <h1 data-testid="product-detail-name">{ title }</h1>
-        <ButtonAddCart dataTestid="product-detail-add-to-cart" id={ id } />
+        <ButtonAddCart
+          dataTestid="product-detail-add-to-cart"
+          product={ productDetails }
+        />
 
         <h1>Avaliações</h1>
         <div>
