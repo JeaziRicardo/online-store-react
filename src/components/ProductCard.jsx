@@ -10,14 +10,17 @@ class ProductCard extends Component {
     return (
       <section>
         { results.length === 0 && inputEmpty }
-        { results.length !== 0 && results.map(({ title, price, thumbnail, id }) => (
-          <div key={ id } data-testid="product">
-            <Link to={ `/productdetails/${id}` } data-testid="product-detail-link">
-              <h3>{ title }</h3>
-              <img src={ thumbnail } alt={ title } />
-              <p>{ `R$ ${price}` }</p>
+        { results.length !== 0 && results.map((prodResult) => (
+          <div key={ prodResult.id } data-testid="product">
+            <Link
+              to={ `/productdetails/${prodResult.id}` }
+              data-testid="product-detail-link"
+            >
+              <h3>{ prodResult.title }</h3>
+              <img src={ prodResult.thumbnail } alt={ prodResult.title } />
+              <p>{ `R$ ${prodResult.price}` }</p>
             </Link>
-            <ButtonAddCart dataTestid="product-add-to-cart" id={ id } />
+            <ButtonAddCart dataTestid="product-add-to-cart" product={ prodResult } />
           </div>
         )) }
       </section>
@@ -31,5 +34,3 @@ ProductCard.propTypes = {
 };
 
 export default ProductCard;
-
-/* Nesse arquivo só passei o id como props para o ButtonAddCart */

@@ -13,71 +13,48 @@ export default class ShoppingCart extends Component {
     };
   }
 
-   componentDidMount = async () => {
-     if (localStorage.getItem('arrProds') !== null) { // essa linha é apenas para evitar erro caso cliquemos no carrinho e não tenha produto
-       const arrIds = JSON.parse(localStorage.getItem('arrProds')); // pega o arr de IDs que está no local storage
+  componentDidMount = async () => {
+    if (localStorage.getItem('arrProds') !== null) { // essa linha é apenas para evitar erro caso cliquemos no carrinho e não tenha produto
+      const arrProds = JSON.parse(localStorage.getItem('arrProds')); // pega o arr de IDs que está no local storage
 
-       const arrObjs = [];
+      // no fim de todo a iteração, basta setar o arr no state
+      this.setState({
+        cartList: arrProds,
+      });
+    }
+  }
 
-       const prom = arrIds.map(async (id) => {
-         const obj = await this.mountObj(id);
-         obj.quant = 1;
+  // método simples que pega o id e busca seu respectivo obj no endpoint correto
+  async mountObj(id) {
+    const obj = await getProductDetails(id);
+    return obj;
+  }
 
-         const objJaExiste = arrObjs.find((iterableObj) => iterableObj.id === obj.id);
+  render() {
+    const { cartList } = this.state;
 
-         if (objJaExiste !== undefined) {
-           arrObjs.forEach((iterableObj) => {
-             if (iterableObj.id === objJaExiste.id) { iterableObj.quant += 1; }
-           });
-         } else {
-           arrObjs.push(obj);
-         }
-       });
+    return (
+      <div>
+        {
+          cartList.length !== 0
+            ? (
+              <div>
+                { // map para iterar sobre o array de produtos
+                  cartList.map((prod, index) => (
+                    <div key={ index }>
+                      <p data-testid="shopping-cart-product-name">{ prod.title }</p>
 
-       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
-       await Promise.all(prom);
-
-       // no fim de todo a iteração, basta setar o arr no state
-       this.setState({
-         cartList: arrObjs,
-       });
-     }
-   }
-
-   // método simples que pega o id e busca seu respectivo obj no endpoint correto
-   async mountObj(id) {
-     const obj = await getProductDetails(id);
-     return obj;
-   }
-
-   render() {
-     const { cartList } = this.state;
-
-     return (
-       <div>
-         {
-           cartList.length !== 0
-             ? (
-               <div>
-                 { // map para iterar sobre o array de produtos
-                   cartList.map((prod, index) => (
-                     <div key={ index }>
-                       <p data-testid="shopping-cart-product-name">{ prod.title }</p>
-
-                       <QuantityButton
-                         title={ prod.title }
-                         loadPage={ this.componentDidMount }
-                         id={ prod.id }
-                         prodQuantity={ prod.quant }
-                       />
-                     </div>
-                   ))
-                 }
-               </div>
-             )
-             : (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)
-         }
-       </div>
-     );
-   }
+                      <QuantityButton
+                        prodQuantity={ prod.quant }
+                      />
+                    </div>
+                  ))
+                }
+              </div>
+            )
+            : (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)
+        }
+      </div>
+    );
+  }
 }
