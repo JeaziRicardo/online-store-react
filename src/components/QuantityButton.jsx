@@ -1,6 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-// import { handleClick } from './ButtonAddCart';
 import '../App.css';
 
 class QuantityButton extends React.Component {
@@ -15,57 +14,28 @@ class QuantityButton extends React.Component {
   }
 
   handleClickPlus() {
-    const { id } = this.props;
-    const { qtdProducts } = this.state;
-
-    if (localStorage.getItem('arrProds') === null) {
-      const arrIdProds = [id];
-      localStorage.setItem('arrProds', JSON.stringify(arrIdProds));
-    } else {
-      const arrIdProdStorage = JSON.parse(localStorage.getItem('arrProds'));
-      arrIdProdStorage.push(id);
-
-      localStorage.setItem('arrProds', JSON.stringify(arrIdProdStorage));
-
-      this.setState({
-        qtdProducts: qtdProducts + 1,
-      });
-    }
+    this.setState((prevState) => ({
+      qtdProducts: prevState.qtdProducts + 1,
+    }));
   }
 
   handleClickMinus() {
-    const { id } = this.props;
     const { qtdProducts } = this.state;
 
-    if (qtdProducts <= 0) {
-      this.setState({
-        qtdProducts: 0,
-      });
-    } else {
-      const arrIdProdStorage = JSON.parse(localStorage.getItem('arrProds'));
-      arrIdProdStorage.splice(id, 1);
-      localStorage.setItem('arrProds', JSON.stringify(arrIdProdStorage));
-
+    if (qtdProducts > 0) {
       this.setState({
         qtdProducts: qtdProducts - 1,
       });
-    // loadPage();
     }
   }
 
-  // ao carregar pag, definir valor inicial
   componentDidMount = () => {
-    const { id } = this.props;
+    const { prodQuantity } = this.props;
 
-    const cartItems = JSON.parse(localStorage.getItem('arrProds'));
-    if (cartItems) {
-      const itemsFiltered = cartItems.filter((itemId) => itemId === id);
-
-      // quantidade do produto atual
-      this.setState({
-        qtdProducts: itemsFiltered.length,
-      });
-    }
+    // quantidade do produto atual
+    this.setState({
+      qtdProducts: prodQuantity,
+    });
   }
 
   render() {
@@ -94,7 +64,7 @@ class QuantityButton extends React.Component {
 }
 
 QuantityButton.propTypes = {
-  id: propTypes.string.isRequired,
+  prodQuantity: propTypes.number.isRequired,
 };
 
 export default QuantityButton;
