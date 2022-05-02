@@ -30,6 +30,10 @@
   color: #61dafb;
 }
 
+.qtdProduct {
+  display: flex;
+}
+
 @keyframes App-logo-spin {
 
   from {
