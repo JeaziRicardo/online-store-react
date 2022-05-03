@@ -38,19 +38,22 @@ export default class ShoppingCart extends Component {
         {
           cartList.length !== 0
             ? (
-              <div>
-                { // map para iterar sobre o array de produtos
-                  cartList.map((prod, index) => (
-                    <div key={ index }>
-                      <p data-testid="shopping-cart-product-name">{ prod.title }</p>
+              <section>
+                <div>
+                  {// map para iterar sobre o array de produtos
+                    cartList.map((prod, index) => (
+                      <div key={ index }>
+                        <p data-testid="shopping-cart-product-name">{prod.title}</p>
 
-                      <QuantityButton
-                        prodQuantity={ prod.quant }
-                      />
-                    </div>
-                  ))
-                }
-              </div>
+                        <QuantityButton
+                          prodQuantity={ prod.quant }
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
+                <button type="button">Finalizar Compra</button>
+              </section>
             )
             : (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)
         }
