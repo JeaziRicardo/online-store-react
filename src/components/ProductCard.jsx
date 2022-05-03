@@ -19,6 +19,10 @@ class ProductCard extends Component {
               <h3>{ prodResult.title }</h3>
               <img src={ prodResult.thumbnail } alt={ prodResult.title } />
               <p>{ `R$ ${prodResult.price}` }</p>
+              {
+                prodResult.shipping.free_shipping
+                && <strong data-testid="free-shipping">Frete Grátis</strong>
+              }
             </Link>
             <ButtonAddCart dataTestid="product-add-to-cart" product={ prodResult } />
           </div>
