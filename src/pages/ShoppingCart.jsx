@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import QuantityButton from '../components/QuantityButton';
 import { getProductDetails } from '../services/api';
 
@@ -10,6 +11,7 @@ export default class ShoppingCart extends Component {
 
     this.state = {
       cartList: [],
+      finished: false,
     };
   }
 
@@ -24,6 +26,10 @@ export default class ShoppingCart extends Component {
     }
   }
 
+  handleClick = () => {
+    this.setState({ finished: true });
+  };
+
   // método simples que pega o id e busca seu respectivo obj no endpoint correto
   async mountObj(id) {
     const obj = await getProductDetails(id);
@@ -31,29 +37,39 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { cartList } = this.state;
+    const { cartList, finished } = this.state;
 
     return (
       <div>
         {
           cartList.length !== 0
             ? (
-              <div>
-                { // map para iterar sobre o array de produtos
-                  cartList.map((prod, index) => (
-                    <div key={ index }>
-                      <p data-testid="shopping-cart-product-name">{ prod.title }</p>
+              <section>
+                <div>
+                  {// map para iterar sobre o array de produtos
+                    cartList.map((prod, index) => (
+                      <div key={ index }>
+                        <p data-testid="shopping-cart-product-name">{prod.title}</p>
 
-                      <QuantityButton
-                        prodQuantity={ prod.quant }
-                      />
-                    </div>
-                  ))
-                }
-              </div>
+                        <QuantityButton
+                          prodQuantity={ prod.quant }
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
+                <button
+                  data-testid="checkout-products"
+                  type="button"
+                  onClick={ this.handleClick }
+                >
+                  Finalizar Compra
+                </button>
+              </section>
             )
             : (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)
         }
+        {finished && <Redirect to="/checkout" />}
       </div>
     );
   }
