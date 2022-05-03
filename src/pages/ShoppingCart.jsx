@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import QuantityButton from '../components/QuantityButton';
 import { getProductDetails } from '../services/api';
 
@@ -10,6 +11,7 @@ export default class ShoppingCart extends Component {
 
     this.state = {
       cartList: [],
+      finished: false,
     };
   }
 
@@ -24,6 +26,10 @@ export default class ShoppingCart extends Component {
     }
   }
 
+  handleClick = () => {
+    this.setState({ finished: true });
+  };
+
   // método simples que pega o id e busca seu respectivo obj no endpoint correto
   async mountObj(id) {
     const obj = await getProductDetails(id);
@@ -31,7 +37,7 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { cartList } = this.state;
+    const { cartList, finished } = this.state;
 
     return (
       <div>
@@ -55,6 +61,7 @@ export default class ShoppingCart extends Component {
                 <button
                   data-testid="checkout-products"
                   type="button"
+                  onClick={ this.handleClick }
                 >
                   Finalizar Compra
                 </button>
@@ -62,6 +69,7 @@ export default class ShoppingCart extends Component {
             )
             : (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)
         }
+        {finished && <Redirect to="/checkout" />}
       </div>
     );
   }
