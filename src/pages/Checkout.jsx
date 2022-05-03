@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
 
 class Checkout extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cartList: [],
+    };
+  }
+
+  componentDidMount = async () => {
+    if (localStorage.getItem('arrProds') !== null) {
+      const arrProds = JSON.parse(localStorage.getItem('arrProds'));
+      this.setState({
+        cartList: arrProds,
+      });
+    }
+  }
+
   render() {
+    const { cartList } = this.state;
     return (
       <main>
         <h1>Revise e confirme sua compra</h1>
         <form>
           <div>
             <h3>Revise seus produtos</h3>
+            {
+              cartList.map((prod) => (
+                <div key={ prod.id }>
+                  <p data-testid="shopping-cart-product-name">{prod.title}</p>
+                </div>
+              ))
+            }
           </div>
           <div>
             <h3>Informações do comprador</h3>
