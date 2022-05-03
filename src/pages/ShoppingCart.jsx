@@ -52,7 +52,12 @@ export default class ShoppingCart extends Component {
                     ))
                   }
                 </div>
-                <button type="button">Finalizar Compra</button>
+                <button
+                  data-testid="checkout-products"
+                  type="button"
+                >
+                  Finalizar Compra
+                </button>
               </section>
             )
             : (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)
