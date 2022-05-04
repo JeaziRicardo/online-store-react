@@ -53,6 +53,7 @@ export default class ShoppingCart extends Component {
 
                         <QuantityButton
                           prodQuantity={ prod.quant }
+                          qtdAvailable={ prod.available_quantity }
                         />
                       </div>
                     ))

@@ -10,6 +10,7 @@ class QuantityButton extends React.Component {
 
     this.state = {
       qtdProducts: 0,
+      qtdAvailable: 0,
     };
   }
 
@@ -30,16 +31,17 @@ class QuantityButton extends React.Component {
   }
 
   componentDidMount = () => {
-    const { prodQuantity } = this.props;
+    const { prodQuantity, qtdAvailable } = this.props;
 
     // quantidade do produto atual
     this.setState({
       qtdProducts: prodQuantity,
+      qtdAvailable,
     });
   }
 
   render() {
-    const { qtdProducts } = this.state;
+    const { qtdProducts, qtdAvailable } = this.state;
 
     return (
       <div className="qtdProduct">
@@ -51,13 +53,25 @@ class QuantityButton extends React.Component {
           -
         </button>
         <p data-testid="shopping-cart-product-quantity">{ qtdProducts }</p>
-        <button
-          type="button"
-          data-testid="product-increase-quantity"
-          onClick={ this.handleClickPlus }
-        >
-          +
-        </button>
+        {qtdProducts >= qtdAvailable
+          ? (
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ this.handleClickPlus }
+              disabled
+            >
+              +
+            </button>
+          ) : (
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ this.handleClickPlus }
+            >
+              +
+            </button>
+          )}
       </div>
     );
   }
@@ -65,6 +79,7 @@ class QuantityButton extends React.Component {
 
 QuantityButton.propTypes = {
   prodQuantity: propTypes.number.isRequired,
+  qtdAvailable: propTypes.number.isRequired,
 };
 
 export default QuantityButton;
