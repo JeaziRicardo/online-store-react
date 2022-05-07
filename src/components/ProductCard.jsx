@@ -39,6 +39,7 @@ class ProductCard extends Component {
 ProductCard.propTypes = {
   data: PropTypes.shape().isRequired,
   inputEmpty: PropTypes.shape().isRequired,
+  updateTotal: PropTypes.func.isRequired,
 };
 
 export default ProductCard;
