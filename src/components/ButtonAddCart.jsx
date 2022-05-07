@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 export default class ButtonAddCart extends Component {
   handleClick = () => {
-    const { product } = this.props; // veio do ProductCart
+    const { product, updateTotal } = this.props; // veio do ProductCart
 
     const productProps = product;
 
@@ -26,6 +26,8 @@ export default class ButtonAddCart extends Component {
 
       localStorage.setItem('arrProds', JSON.stringify(arrProdStorage)); // e seto novamente no local storage.
     }
+
+    updateTotal();
   }
 
   render() {

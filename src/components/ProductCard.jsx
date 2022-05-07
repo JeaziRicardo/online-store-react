@@ -5,7 +5,7 @@ import ButtonAddCart from './ButtonAddCart';
 
 class ProductCard extends Component {
   render() {
-    const { data, inputEmpty } = this.props;
+    const { data, inputEmpty, updateTotal } = this.props;
     const { results } = data;
     return (
       <section>
@@ -24,7 +24,11 @@ class ProductCard extends Component {
                 && <strong data-testid="free-shipping">Frete Grátis</strong>
               }
             </Link>
-            <ButtonAddCart dataTestid="product-add-to-cart" product={ prodResult } />
+            <ButtonAddCart
+              updateTotal={ updateTotal }
+              dataTestid="product-add-to-cart"
+              product={ prodResult }
+            />
           </div>
         )) }
       </section>

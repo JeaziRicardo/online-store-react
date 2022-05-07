@@ -7,9 +7,16 @@ import CartButton from '../components/CartButton';
 export default class ProductDetails extends Component {
   constructor() {
     super();
+
+    let quantity = JSON.parse(localStorage.getItem('total'));
+    if (!quantity) {
+      quantity = 0;
+    }
+
     this.state = {
       productDetails: '',
       savedRating: '',
+      quantityCart: quantity,
     };
   }
 
@@ -28,6 +35,17 @@ export default class ProductDetails extends Component {
         savedRating: rating,
       });
     }
+  }
+
+  updateTotal = () => {
+    let total = JSON.parse(localStorage.getItem('total'));
+    total += 1;
+
+    this.setState({
+      quantityCart: total,
+    });
+
+    localStorage.setItem('total', total);
   }
 
   ratingExists = () => {
@@ -69,16 +87,17 @@ export default class ProductDetails extends Component {
 
   render() {
     const { productDetails: { title }, savedRating } = this.state;
-    const { productDetails } = this.state;
+    const { productDetails, quantityCart } = this.state;
     // const { match: { params: { id } } } = this.props;
 
     return (
       <div>
-        <CartButton />
+        <CartButton quantityCart={ quantityCart } />
         <h1 data-testid="product-detail-name">{ title }</h1>
         <ButtonAddCart
           dataTestid="product-detail-add-to-cart"
           product={ productDetails }
+          updateTotal={ this.updateTotal }
         />
 
         <h1>Avaliações</h1>

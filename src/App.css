@@ -1,10 +1,31 @@
-.App {
-  text-align: center;
+/* cartButton */
+.btnCartContainer {
+  position: relative;
+  margin-right: 60px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cartIcon {
+  width: 50px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+.quantityCart {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  left: 45px;
+  width: 10px;
+  background-color: yellow;
+  padding: 5px;
+  border-radius: 50%;
+  text-decoration: none;
+  top: 15px;
+  color: black;
+  border: 1px solid black;
 }
 
 @media ( prefers-reduced-motion : no-preference ) {
