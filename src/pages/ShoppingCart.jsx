@@ -15,7 +15,7 @@ export default class ShoppingCart extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     if (localStorage.getItem('arrProds') !== null) { // essa linha é apenas para evitar erro caso cliquemos no carrinho e não tenha produto
       const arrProds = JSON.parse(localStorage.getItem('arrProds')); // pega o arr de IDs que está no local storage
 

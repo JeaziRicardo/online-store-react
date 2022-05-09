@@ -10,12 +10,17 @@ export default class Homepage extends Component {
     super();
 
     this.onChangeRadio = this.onChangeRadio.bind(this);
+    // pegar do localStorage
+    let quantity = JSON.parse(localStorage.getItem('total'));
+    if (!quantity) {
+      quantity = 0;
+    }
 
     this.state = {
       categoryList: [],
       search: '',
       data: null,
-      // idSelectedCategory: '',
+      quantityCart: quantity,
     };
   }
 
@@ -46,9 +51,19 @@ export default class Homepage extends Component {
     this.setState({ data });
   };
 
-  render() {
-    const { categoryList, data } = this.state;
+  updateTotal = () => {
+    let total = JSON.parse(localStorage.getItem('total'));
+    total += 1;
 
+    this.setState({
+      quantityCart: total,
+    });
+
+    localStorage.setItem('total', total);
+  }
+
+  render() {
+    const { categoryList, data, quantityCart } = this.state;
     return (
       <div className="homepage">
         <CategoryFilter
@@ -70,13 +85,14 @@ export default class Homepage extends Component {
         >
           Busca
         </button>
-        <CartButton />
+        <CartButton quantityCart={ quantityCart } />
         { data === null && (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) }
         { data !== null && <ProductCard
+          updateTotal={ this.updateTotal }
           data={ data }
           inputEmpty={ <p>Nenhum produto foi encontrado</p> }
         /> }
